@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6724" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
         <!--News View Controller-->
@@ -60,6 +60,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="TBT-8a-gYm" kind="show" identifier="showWebView" id="XWd-Ky-0vu"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -94,6 +97,54 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--News Web View Controller-->
+        <scene sceneID="QEn-8r-0Ao">
+            <objects>
+                <viewController id="TBT-8a-gYm" customClass="NewsWebViewController" customModule="NewsExplorer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VDp-Ps-cns"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bxj-Yh-0bi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xhn-Ia-WVE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6vH-pY-1Nu">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="f0u-Rw-yyt">
+                                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="V5n-MD-sDw">
+                                            <connections>
+                                                <action selector="backButton:" destination="TBT-8a-gYm" id="uNd-oq-tJb"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jAl-ZN-ugj">
+                                <rect key="frame" x="0.0" y="64" width="325" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="jAl-ZN-ugj" secondAttribute="trailing" constant="-5" id="85t-87-av2"/>
+                            <constraint firstAttribute="trailing" secondItem="6vH-pY-1Nu" secondAttribute="trailing" id="I6k-6Z-foG"/>
+                            <constraint firstItem="jAl-ZN-ugj" firstAttribute="leading" secondItem="Xhn-Ia-WVE" secondAttribute="leading" id="KRu-2A-q06"/>
+                            <constraint firstItem="6vH-pY-1Nu" firstAttribute="leading" secondItem="Xhn-Ia-WVE" secondAttribute="leading" id="eaf-Sa-M2E"/>
+                            <constraint firstAttribute="bottom" secondItem="jAl-ZN-ugj" secondAttribute="bottom" id="f2Y-6I-4vG"/>
+                            <constraint firstItem="6vH-pY-1Nu" firstAttribute="top" secondItem="Xhn-Ia-WVE" secondAttribute="top" constant="20" id="n39-je-GeD"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="webView" destination="jAl-ZN-ugj" id="NXJ-7k-zgf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WjD-Ia-Q5T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="838" y="254"/>
         </scene>
     </scenes>
 </document>

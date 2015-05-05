@@ -14,6 +14,7 @@
 		53CD194F1AF2F68E002933AE /* NewsExplorerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CD194E1AF2F68E002933AE /* NewsExplorerTests.swift */; };
 		53CD19591AF2F6C5002933AE /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CD19581AF2F6C5002933AE /* NewsViewController.swift */; };
 		53CD195D1AF6E418002933AE /* NewSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CD195C1AF6E418002933AE /* NewSite.swift */; };
+		B70A92901AF9479F00621836 /* NewsWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70A928F1AF9479F00621836 /* NewsWebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		53CD194E1AF2F68E002933AE /* NewsExplorerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsExplorerTests.swift; sourceTree = "<group>"; };
 		53CD19581AF2F6C5002933AE /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		53CD195C1AF6E418002933AE /* NewSite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSite.swift; sourceTree = "<group>"; };
+		B70A928F1AF9479F00621836 /* NewsWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsWebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				53CD19361AF2F68D002933AE /* Supporting Files */,
 				53CD19581AF2F6C5002933AE /* NewsViewController.swift */,
 				53CD195C1AF6E418002933AE /* NewSite.swift */,
+				B70A928F1AF9479F00621836 /* NewsWebViewController.swift */,
 			);
 			path = NewsExplorer;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B70A92901AF9479F00621836 /* NewsWebViewController.swift in Sources */,
 				53CD19391AF2F68D002933AE /* AppDelegate.swift in Sources */,
 				53CD19591AF2F6C5002933AE /* NewsViewController.swift in Sources */,
 				53CD195D1AF6E418002933AE /* NewSite.swift in Sources */,
@@ -411,6 +415,7 @@
 				53CD19541AF2F68E002933AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		53CD19551AF2F68E002933AE /* Build configuration list for PBXNativeTarget "NewsExplorerTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +424,7 @@
 				53CD19571AF2F68E002933AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
