@@ -67,27 +67,30 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
     {
         println("load url")
         newSites.load(stringUrl) {
-        (companies, errorString) -> Void in
-        if let unwrappedErrorString = errorString {
-            // can do something about error here
-            println("Eror with load")
-            println(unwrappedErrorString)
+        (newsites, errorString) -> Void in
+        if "" == errorString {
+            completionHandler()
+            
         } else {
-            println("it worked")
+            println("error")
             
             //self.newsTableView.reloadData()
         }
-            completionHandler()
-        }
+            println("after loaded")
+            println("count: \(self.newSites.sites.count)")
         
-        for item in newSites.sites
-        {
-            println(item)
-            var url = NSURL(string: item)
-            beginParsing(url!)
+            for item in self.newSites.sites
+            {
+                println(item)
+                var url = NSURL(string: item)
+                self.beginParsing(url!)
+            }
         }
+        // can do something about error here
+        
 
-        println("count: \(newSites.sites.count)")
+       
+        
 
     }
     
@@ -113,7 +116,8 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
                     //self.url = "http://babbage.cs.missouri.edu/~tlw44f/index.php/apiServer/sources/?latitude=39.248207&longitude=-92.129974&radius=100.json"
                     
                     println(self.url!)
-                    self.ParseUrl(self.url!, completionHandler)
+                    self.ParseUrl(self.url!)
+                        { () -> Void in }
                 }
                 
 
@@ -174,6 +178,10 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
         parser = NSXMLParser(contentsOfURL: url)!
         parser.delegate = self
         parser.parse()
+        while posts.count > 20
+        {
+            posts.removeLastObject()
+        }
         articleTableView.reloadData()
     }
     

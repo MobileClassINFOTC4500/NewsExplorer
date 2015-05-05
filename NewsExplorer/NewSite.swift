@@ -13,7 +13,7 @@ class NewSite{
     
     init()
     {
-        sites = ["http://www.bocojo.com/?rss=news","http://www.connectmidmissouri.com/rss.aspx?feed=local_news", "http://www.komu.com/feeds/rssfeed.cfm?category=5&cat_name=News"]
+        sites = []
     }
     
     func load(fromURLString: String, completionHandler: (NewSite, String?) -> Void) {
@@ -49,7 +49,7 @@ class NewSite{
                 for feed in jsonResult
                 {
                     sites.append("\(feed)")
-                    println("\(feed)")
+                    //println("\(feed)")
                 }
             }
         } else {
@@ -59,7 +59,7 @@ class NewSite{
                 })
             }
         }
-        
+        completionHandler(self, "")
     }
 
 
