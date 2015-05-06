@@ -227,14 +227,11 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
     
     override func prepareForSegue(segue: UIStoryboardSegue,
         sender: AnyObject?) {
-            
             if segue.identifier == "showWebView" {
-                let detailViewController = segue.destinationViewController
-                    as NewsWebViewController
+                let detailViewController = segue.destinationViewController as NewsWebViewController
                 detailViewController.webSite = (string: url)
+            } else if segue.identifier == "showSearchView" {
+                let detailViewController = segue.destinationViewController as SearchViewController
+            }
         }
-    }
-    
-    
-
 }
