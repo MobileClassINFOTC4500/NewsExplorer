@@ -94,12 +94,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue,
+    func prepareForSegue(segue: UIStoryboardSegue, didSelectRowAtIndexPath indexPath: NSIndexPath,
         sender: AnyObject?) {
             if segue.identifier == "changeLocation" {
                 let detailViewController = segue.destinationViewController as NewsViewController
-                detailViewController.latitude = setLatitude(latitude)
-                detailViewController.longitude = setLongitude(longitude)
+                //detailViewController.latitude = setLatitude(latitude)
+                //detailViewController.longitude = setLongitude(longitude)
+                detailViewController.navBar.topItem?.title = locations[indexPath.row]
             }
     }
     
