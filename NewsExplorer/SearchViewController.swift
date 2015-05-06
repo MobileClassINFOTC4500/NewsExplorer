@@ -53,29 +53,54 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         println(locations[row])
     }
     
-    func setLocation(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
+    func setLatitude(manager: CLLocationManager!) -> (CLLocationDegrees) {
         
         if contains(locations, "Columbia") {
-            var latitude: CLLocationDegrees = 38.9514
-            var longitude:CLLocationDegrees = -92.3283
+            var latitude: CLLocationDegrees = CLLocationDegrees(38.9514)
         }
         else if contains(locations, "St. Louis") {
-            var latitude: CLLocationDegrees = 38.6272
-            var longitude:CLLocationDegrees = -90.1978
+            var latitude: CLLocationDegrees = CLLocationDegrees(38.6272)
         }
         else if contains(locations, "Kansas City") {
-            var latitude: CLLocationDegrees = 39.0997
-            var longitude:CLLocationDegrees = -94.5783
+            var latitude: CLLocationDegrees = CLLocationDegrees(39.0997)
         }
         else if contains(locations, "Springfield") {
-            var latitude: CLLocationDegrees = 37.1950
-            var longitude:CLLocationDegrees = -93.2861
+            var latitude: CLLocationDegrees = CLLocationDegrees(37.1950)
         }
         else if contains(locations, "Nashville") {
-            var latitude: CLLocationDegrees = 36.1667
-            var longitude:CLLocationDegrees = -86.7833
+            var latitude: CLLocationDegrees = CLLocationDegrees(36.1667)
         }
+        return (latitude!)
+    }
+    
+    func setLongitude(manager: CLLocationManager!) -> (CLLocationDegrees) {
+        
+        if contains(locations, "Columbia") {
+            var longitude:CLLocationDegrees = CLLocationDegrees(-92.3283)
+        }
+        else if contains(locations, "St. Louis") {
+            var longitude:CLLocationDegrees = CLLocationDegrees(-90.1978)
+        }
+        else if contains(locations, "Kansas City") {
+            var longitude:CLLocationDegrees = CLLocationDegrees(-94.5783)
+        }
+        else if contains(locations, "Springfield") {
+            var longitude:CLLocationDegrees = CLLocationDegrees(-93.2861)
+        }
+        else if contains(locations, "Nashville") {
+            var longitude:CLLocationDegrees = CLLocationDegrees(-86.7833)
+        }
+        return (longitude!)
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue,
+        sender: AnyObject?) {
+            if segue.identifier == "changeLocation" {
+                let detailViewController = segue.destinationViewController as NewsViewController
+                detailViewController.latitude = setLatitude(latitude)
+                detailViewController.longitude = setLongitude(longitude)
+            }
     }
     
     @IBAction func backButton(sender: AnyObject) {

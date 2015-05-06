@@ -142,6 +142,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" identifier="changeLocation" id="Cas-aX-jCY"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
