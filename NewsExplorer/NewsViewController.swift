@@ -22,6 +22,9 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
     var date = NSMutableString()
     var link = NSMutableString()
     
+    var segueTitle:NSString?
+    var segueLink:NSString?
+    
     @IBOutlet weak var navBar: UINavigationBar!
     
     @IBOutlet weak var radiusSlider: UISlider!
@@ -82,7 +85,7 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
         
             for item in self.newSites.sites
             {
-                println(item)
+                //println(item)
                 var url = NSURL(string: item)
                 self.beginParsing(url!)
             }
@@ -116,7 +119,7 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
                     
                     //self.url = "http://babbage.cs.missouri.edu/~tlw44f/index.php/apiServer/sources/?latitude=39.248207&longitude=-92.129974&radius=100.json"
                     
-                    println(self.url!)
+                    //println(self.url!)
                     self.ParseUrl(self.url!)
                         { () -> Void in }
                 }
@@ -157,6 +160,12 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        segueTitle = posts.objectAtIndex(indexPath.row).valueForKey("title") as? NSString
+        segueLink = posts.objectAtIndex(indexPath.row).valueForKey("link") as? NSString
+        println("Title is \(segueTitle!)")
+        println("Link is \(segueLink!)")
+        performSegueWithIdentifier("showWebView", sender: self)
+
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -215,6 +224,7 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
         } else if element.isEqualToString("pubDate") {
             date.appendString(string)
         } else if element.isEqualToString("link") {
+            //println(string)
             link.appendString(string)
         }
     }
@@ -229,17 +239,19 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
             if !date.isEqual(nil) {
                 elements.setObject(date, forKey: "date")
             }
+            if !link.isEqual(nil) {
+                elements.setObject(link, forKey: "link")
+            }
             
             posts.addObject(elements)
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue,
-        sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
             if segue.identifier == "showWebView" {
                 let detailViewController = segue.destinationViewController as NewsWebViewController
-                detailViewController.self.navBar.topItem?.title = title
-                //detailViewController.webSite = (string: link)
+                //detailViewController.self.navBar.topItem?.title = segueTitle
+                detailViewController.webSite = (string: segueLink)
             } else if segue.identifier == "showSearchView" {
                 let detailViewController = segue.destinationViewController as SearchViewController
             }

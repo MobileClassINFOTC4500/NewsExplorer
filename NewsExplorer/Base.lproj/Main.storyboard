@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6724" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
     </dependencies>
     <scenes>
         <!--News View Controller-->
@@ -37,7 +37,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mY1-Na-YZu">
                                 <rect key="frame" x="25" y="79" width="74" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zMS-1Z-IIb">
@@ -53,7 +53,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="604-eQ-GqW">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ak6-0a-1pB">
@@ -64,9 +64,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="TBT-8a-gYm" kind="show" identifier="showWebView" id="OOD-5V-BwA"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -97,11 +94,12 @@
                         <outlet property="navBar" destination="nzc-aB-sjM" id="ZzX-Go-4Gv"/>
                         <outlet property="radiusSlider" destination="ZGz-0f-utb" id="NCZ-EX-7cG"/>
                         <outlet property="sliderLabel" destination="mY1-Na-YZu" id="t9B-wL-xzM"/>
+                        <segue destination="TBT-8a-gYm" kind="show" identifier="showWebView" id="ZxB-Ve-tSg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="286" y="-323"/>
+            <point key="canvasLocation" x="309" y="-22"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="yoF-iW-oYg">
@@ -140,7 +138,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Ca-J5-XvZ">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -200,25 +198,27 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jAl-ZN-ugj">
-                                <rect key="frame" x="0.0" y="64" width="325" height="504"/>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BJT-UN-bsL">
+                                <rect key="frame" x="0.0" y="70" width="320" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="jAl-ZN-ugj" secondAttribute="trailing" constant="-5" id="85t-87-av2"/>
+                            <constraint firstAttribute="trailing" secondItem="BJT-UN-bsL" secondAttribute="trailing" id="0u6-BC-5td"/>
+                            <constraint firstItem="BJT-UN-bsL" firstAttribute="leading" secondItem="Xhn-Ia-WVE" secondAttribute="leading" id="C4l-Z6-68T"/>
                             <constraint firstAttribute="trailing" secondItem="6vH-pY-1Nu" secondAttribute="trailing" id="I6k-6Z-foG"/>
-                            <constraint firstItem="jAl-ZN-ugj" firstAttribute="leading" secondItem="Xhn-Ia-WVE" secondAttribute="leading" id="KRu-2A-q06"/>
+                            <constraint firstItem="BJT-UN-bsL" firstAttribute="top" secondItem="VDp-Ps-cns" secondAttribute="bottom" constant="50" id="T2x-W4-TID"/>
                             <constraint firstItem="6vH-pY-1Nu" firstAttribute="leading" secondItem="Xhn-Ia-WVE" secondAttribute="leading" id="eaf-Sa-M2E"/>
-                            <constraint firstAttribute="bottom" secondItem="jAl-ZN-ugj" secondAttribute="bottom" id="f2Y-6I-4vG"/>
                             <constraint firstItem="6vH-pY-1Nu" firstAttribute="top" secondItem="Xhn-Ia-WVE" secondAttribute="top" constant="20" id="n39-je-GeD"/>
+                            <constraint firstAttribute="bottom" secondItem="BJT-UN-bsL" secondAttribute="bottom" id="qGn-rs-EUL"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="navBar" destination="6vH-pY-1Nu" id="e7F-Zz-0JZ"/>
-                        <outlet property="webView" destination="jAl-ZN-ugj" id="YYz-QB-LwF"/>
+                        <outlet property="webView" destination="BJT-UN-bsL" id="jgz-FF-o5A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WjD-Ia-Q5T" userLabel="First Responder" sceneMemberID="firstResponder"/>

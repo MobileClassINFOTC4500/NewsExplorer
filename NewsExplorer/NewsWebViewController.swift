@@ -19,10 +19,13 @@ class NewsWebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let address = webSite {
-            let webURL = NSURL(string: address)
-            println(webURL)
-            let urlRequest = NSURLRequest(URL: webURL!)
-            webView.loadRequest(urlRequest)
+            if let webURL = NSURL(string: address)  {
+                let webURL = NSURL(string: address)
+                //println(webURL)
+                let urlRequest = NSURLRequest(URL: webURL!)
+                webView.loadRequest(urlRequest)
+            }
+            
         }
     }
 
