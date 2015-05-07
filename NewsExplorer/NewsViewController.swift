@@ -20,6 +20,7 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
     var element = NSString()
     var title1 = NSMutableString()
     var date = NSMutableString()
+    var link = NSMutableString()
     
     @IBOutlet weak var navBar: UINavigationBar!
     
@@ -155,6 +156,9 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
         return posts.count
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("homeNewsCell", forIndexPath: indexPath) as UITableViewCell
 
@@ -197,6 +201,9 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
             title1 = ""
             date = NSMutableString.alloc()
             date = ""
+            link = NSMutableString.alloc()
+            link = ""
+            
         }
     }
     
@@ -207,6 +214,8 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
             title1.appendString(string)
         } else if element.isEqualToString("pubDate") {
             date.appendString(string)
+        } else if element.isEqualToString("link") {
+            link.appendString(string)
         }
     }
     
@@ -229,7 +238,8 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
         sender: AnyObject?) {
             if segue.identifier == "showWebView" {
                 let detailViewController = segue.destinationViewController as NewsWebViewController
-                detailViewController.webSite = (string: url)
+                detailViewController.self.navBar.topItem?.title = title
+                //detailViewController.webSite = (string: link)
             } else if segue.identifier == "showSearchView" {
                 let detailViewController = segue.destinationViewController as SearchViewController
             }

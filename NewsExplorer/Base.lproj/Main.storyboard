@@ -64,6 +64,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="TBT-8a-gYm" kind="show" identifier="showWebView" id="OOD-5V-BwA"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -214,12 +217,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="navBar" destination="6vH-pY-1Nu" id="e7F-Zz-0JZ"/>
                         <outlet property="webView" destination="jAl-ZN-ugj" id="YYz-QB-LwF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WjD-Ia-Q5T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="838" y="254"/>
+            <point key="canvasLocation" x="660" y="279"/>
         </scene>
     </scenes>
 </document>

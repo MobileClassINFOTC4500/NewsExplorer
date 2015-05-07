@@ -12,12 +12,15 @@ class NewsWebViewController: UIViewController {
 
     var webSite: String?
     
+    @IBOutlet weak var navBar: UINavigationBar!
+    
     @IBOutlet weak var webView: UIWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if let address = webSite {
             let webURL = NSURL(string: address)
+            println(webURL)
             let urlRequest = NSURLRequest(URL: webURL!)
             webView.loadRequest(urlRequest)
         }
