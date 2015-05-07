@@ -20,6 +20,10 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
     var element = NSString()
     var title1 = NSMutableString()
     var date = NSMutableString()
+    var link = NSMutableString()
+    
+    var segueTitle:NSString?
+    var segueLink:NSString?
     
     @IBOutlet weak var navBar: UINavigationBar!
     
@@ -34,6 +38,9 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
     var latitude:CLLocationDegrees?
     var longitude:CLLocationDegrees?
     
+    var segueLocation = CLLocation()
+    
+    var status = 0
     
     @IBOutlet weak var articleTableView: UITableView!
     
@@ -55,6 +62,7 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
 
         
         // Do any additional setup after loading the view.
+        articleTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,16 +89,12 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
         
             for item in self.newSites.sites
             {
-                println(item)
+                //println(item)
                 var url = NSURL(string: item)
                 self.beginParsing(url!)
             }
         }
         // can do something about error here
-        
-
-       
-        
 
     }
     
@@ -105,8 +109,8 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
             if placemarks.count > 0 {
                 let pm = placemarks[0] as CLPlacemark
                 self.navBar.topItem?.title = self.displayLocationTitle(pm)
-                if(self.latitude != self.locationManager.location.coordinate.latitude || self.longitude != self.locationManager.location.coordinate.longitude)
-                {
+                if(self.latitude != self.locationManager.location.coordinate.latitude || self.longitude != self.locationManager.location.coordinate.longitude && self.status == 0) {
+                    
                     self.latitude = self.locationManager.location.coordinate.latitude
                     println("latitude: \(self.latitude)")
                     self.longitude = self.locationManager.location.coordinate.longitude
@@ -115,11 +119,18 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
                     
                     //self.url = "http://babbage.cs.missouri.edu/~tlw44f/index.php/apiServer/sources/?latitude=39.248207&longitude=-92.129974&radius=100.json"
                     
-                    println(self.url!)
+                    //println(self.url!)
                     self.ParseUrl(self.url!)
                         { () -> Void in }
                 }
-                
+                else if (self.latitude != self.segueLocation.coordinate.latitude || self.longitude != self.segueLocation.coordinate.longitude && self.status == 1) {
+                    
+                    self.latitude = self.segueLocation.coordinate.latitude
+                    self.longitude = self.segueLocation.coordinate.longitude
+                    self.url = "http://babbage.cs.missouri.edu/~tlw44f/index.php/apiServer/sources/?latitude=\(self.latitude!)&longitude=\(self.longitude!)&radius=\(self.radiusStr!).json"
+                    self.ParseUrl(self.url!)
+                        { () -> Void in }
+                }
 
             } else {
                 println("Error with data")
@@ -153,6 +164,16 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        segueTitle = posts.objectAtIndex(indexPath.row).valueForKey("title") as? NSString
+        segueLink = posts.objectAtIndex(indexPath.row).valueForKey("link") as? NSString
+        println("Title is \(segueTitle!)")
+        println("Link is \(segueLink!)")
+        performSegueWithIdentifier("showWebView", sender: self)
+        articleTableView.reloadData()
+
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -197,6 +218,9 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
             title1 = ""
             date = NSMutableString.alloc()
             date = ""
+            link = NSMutableString.alloc()
+            link = ""
+            
         }
     }
     
@@ -207,6 +231,9 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
             title1.appendString(string)
         } else if element.isEqualToString("pubDate") {
             date.appendString(string)
+        } else if element.isEqualToString("link") {
+            //println(string)
+            link.appendString(string)
         }
     }
     
@@ -220,19 +247,21 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
             if !date.isEqual(nil) {
                 elements.setObject(date, forKey: "date")
             }
+            if !link.isEqual(nil) {
+                elements.setObject(link, forKey: "link")
+            }
             
             posts.addObject(elements)
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+            if segue.identifier == "showWebView" {
+                let detailViewController = segue.destinationViewController as NewsWebViewController
+                //detailViewController.navBar.topItem?.title = (string: segueTitle!)
+                detailViewController.webSite = (string: segueLink)
+            } else if segue.identifier == "showSearchView" {
+                let detailViewController = segue.destinationViewController as SearchViewController
+            }
+        }
 }
