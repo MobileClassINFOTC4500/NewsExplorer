@@ -12,9 +12,11 @@ import Foundation
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    let locations = ["Columbia", "St. Louis", "Kansas City", "Springfield", "Nashville"]
+    let locations = ["Columbia, MO", "St. Louis, MO", "Kansas City, MO", "Springfield, MO", "Nashville, TN"]
     
     var locationReturn:CLLocation?
+
+    var cityName: String?
     
     @IBOutlet weak var searchTableView: UITableView!
     
@@ -46,25 +48,27 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let row = indexPath.row
-        println(locations[row])
+        println("city name = \(locations[indexPath.row])")
+        cityName = locations[indexPath.row]
+        performSegueWithIdentifier("changeLocation", sender: self)
+
     }
     
     func setLocation([String]) -> (CLLocation) {
         
-        if contains(locations, "Columbia") {
+        if cityName == "Columbia, MO" {
             locationReturn = CLLocation(latitude: 38.9514, longitude: -92.3283)
         }
-        else if contains(locations, "St. Louis") {
+        else if cityName == "St. Louis, MO" {
             locationReturn = CLLocation(latitude: 38.6272, longitude: -90.1978)
         }
-        else if contains(locations, "Kansas City") {
+        else if cityName == "Kansas City, MO" {
             locationReturn = CLLocation(latitude: 39.0997, longitude: -94.5783)
         }
-        else if contains(locations, "Springfield") {
+        else if cityName == "Springfield, MO" {
             locationReturn = CLLocation(latitude: 37.1950, longitude: -93.2861)
         }
-        else if contains(locations, "Nashville") {
+        else if cityName == "Nashville, TN" {
             locationReturn = CLLocation(latitude: 36.1667, longitude: -86.7833)
         }
         return locationReturn!
@@ -76,14 +80,22 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let detailViewController = segue.destinationViewController as NewsViewController
                 detailViewController.self.segueLocation = setLocation(locations)
                 detailViewController.self.status = 1
-                //detailViewController.longitude = setLongitude(longitude)
-                //detailViewController.navBar.topItem?.title = locations[]
+                if let theName = cityName
+                {
+                    detailViewController.self.segueLocationTitle = theName
+                    println("Sending city name \(cityName)")
+                }
+                else
+                {
+                    println("city name is nil")
+                }
+                
             }
+          
     }
     
     @IBAction func backButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
     
 }

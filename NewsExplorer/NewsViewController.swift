@@ -39,6 +39,7 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
     var longitude:CLLocationDegrees?
     
     var segueLocation = CLLocation()
+    var segueLocationTitle: String?
     
     var status = 0
     
@@ -109,7 +110,8 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
             if placemarks.count > 0 {
                 let pm = placemarks[0] as CLPlacemark
                 self.navBar.topItem?.title = self.displayLocationTitle(pm)
-                if(self.latitude != self.locationManager.location.coordinate.latitude || self.longitude != self.locationManager.location.coordinate.longitude && self.status == 0) {
+                if self.status == 0 {
+                if(self.latitude != self.locationManager.location.coordinate.latitude || self.longitude != self.locationManager.location.coordinate.longitude) {
                     
                     self.latitude = self.locationManager.location.coordinate.latitude
                     println("latitude: \(self.latitude)")
@@ -122,14 +124,19 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
                     //println(self.url!)
                     self.ParseUrl(self.url!)
                         { () -> Void in }
+                    }
                 }
-                else if (self.latitude != self.segueLocation.coordinate.latitude || self.longitude != self.segueLocation.coordinate.longitude && self.status == 1) {
+                else if self.status == 1 {
+                    self.navBar.topItem?.title = self.segueLocationTitle
+                    println("Location is now \(self.segueLocationTitle)")
+                    if (self.latitude != self.segueLocation.coordinate.latitude || self.longitude != self.segueLocation.coordinate.longitude && self.status == 1) {
                     
-                    self.latitude = self.segueLocation.coordinate.latitude
-                    self.longitude = self.segueLocation.coordinate.longitude
-                    self.url = "http://babbage.cs.missouri.edu/~tlw44f/index.php/apiServer/sources/?latitude=\(self.latitude!)&longitude=\(self.longitude!)&radius=\(self.radiusStr!).json"
-                    self.ParseUrl(self.url!)
-                        { () -> Void in }
+                        self.latitude = self.segueLocation.coordinate.latitude
+                        self.longitude = self.segueLocation.coordinate.longitude
+                        self.url = "http://babbage.cs.missouri.edu/~tlw44f/index.php/apiServer/sources/?latitude=\(self.latitude!)&longitude=\(self.longitude!)&radius=\(self.radiusStr!).json"
+                        self.ParseUrl(self.url!)
+                            { () -> Void in }
+                    }
                 }
 
             } else {
@@ -262,6 +269,8 @@ class NewsViewController: UIViewController, CLLocationManagerDelegate, UITableVi
                 detailViewController.webSite = (string: segueLink)
             } else if segue.identifier == "showSearchView" {
                 let detailViewController = segue.destinationViewController as SearchViewController
-            }
+            } else if segue.identifier == "showHistory" {
+                let detailViewContoller = segue.destinationViewController as HistoryViewController
         }
+    }
 }
